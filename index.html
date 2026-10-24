@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enterprise Library Management System for seamless inventory, circulation, and member services">
+  <title>LibraryOS — Enterprise Library Management Platform</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <div class="app-container">
+    
+    <!-- ==============================================================
+         SIDEBAR NAVIGATION
+         ============================================================== -->
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        </div>
+        <div class="brand-info">
+          <h2>LibraryOS</h2>
+          <p>Enterprise Edition</p>
+        </div>
+      </div>
+
+      <ul class="nav-links">
+        <li>
+          <a class="nav-item active" data-view="dashboard">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="books">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+            <span>Books Catalog</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="circulation">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+            <span>Circulation</span>
+            <span class="nav-badge" id="nav-active-badge">Active</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="members">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+            <span>Members</span>
+          </a>
+        </li>
+        <li>
+          <a class="nav-item" data-view="fines">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            <span>Overdue & Fines</span>
+          </a>
+        </li>
+      </ul>
+
+      <div class="sidebar-footer">
+        <div class="system-status-card">
+          <div class="status-indicator">
+            <div class="pulse-dot"></div>
+            <span>System Operational</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.72rem;">Encrypted &bull; Automated Real-time Sync</p>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==============================================================
+         MAIN CONTENT AREA
+         ============================================================== -->
+    <main class="main-content">
+      
+      <!-- Topbar Header -->
+      <header class="topbar">
+        <div class="search-box">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          <input type="text" id="global-search" placeholder="Search by title, author, ISBN...">
+          <span class="search-shortcut">/</span>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="btn btn-primary" onclick="openIssueModal()">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
+            Issue Book
+          </button>
+          
+          <button class="btn btn-secondary" onclick="openAddBookModal()">
+            + Add Book
+          </button>
+
+          <button class="btn-icon" id="theme-toggle-btn" title="Toggle Dark/Light Mode">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+          </button>
+
+          <div class="user-profile">
+            <div class="avatar">AD</div>
+            <div class="user-details">
+              <h4>Admin Staff</h4>
+              <p>Librarian</p>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content-body">
+        
+        <!-- ==========================================================
+             VIEW 1: DASHBOARD
+             ========================================================== -->
+        <section id="view-dashboard" class="view-section active">
+          <div class="page-header">
+            <div class="page-title">
+              <h1>Library Overview</h1>
+              <p>Real-time analytics, circulation metrics, and active inventory tracking.</p>
+            </div>
+            <div>
+              <span class="status-pill status-available">Live Sync Active</span>
+            </div>
+          </div>
+
+          <!-- KPI Stats Grid -->
+          <div class="stats-grid">
+            <div class="stat-card" style="--card-accent: var(--primary); --card-light: var(--primary-light);">
+              <div class="stat-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+              </div>
+              <div class="stat-content">
+                <p>Total Books</p>
+                <h3 id="stat-total-books">0</h3>
+                <span class="stat-badge">● In Inventory</span>
+              </div>
+            </div>
+
+            <div class="stat-card" style="--card-accent: var(--accent-emerald); --card-light: var(--accent-emerald-light);">
+              <div class="stat-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="stat-content">
+                <p>Available on Shelves</p>
+                <h3 id="stat-available-books">0</h3>
+                <span class="stat-badge">Ready to borrow</span>
+              </div>
+            </div>
+
+            <div class="stat-card" style="--card-accent: var(--accent-amber); --card-light: var(--accent-amber-light);">
+              <div class="stat-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+              </div>
+              <div class="stat-content">
+                <p>Currently Issued</p>
+                <h3 id="stat-active-loans">0</h3>
+                <span class="stat-badge" style="color: var(--accent-amber);">Active borrows</span>
+              </div>
+            </div>
+
+            <div class="stat-card" style="--card-accent: var(--accent-rose); --card-light: var(--accent-rose-light);">
+              <div class="stat-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="stat-content">
+                <p>Overdue Loans</p>
+                <h3 id="stat-overdue-loans">0</h3>
+                <span class="stat-badge" style="color: var(--accent-rose);">Pending return</span>
+              </div>
+            </div>
+
+            <div class="stat-card" style="--card-accent: var(--accent-cyan); --card-light: var(--accent-cyan-light);">
+              <div class="stat-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+              </div>
+              <div class="stat-content">
+                <p>Members</p>
+                <h3 id="stat-total-members">0</h3>
+                <span class="stat-badge">Active borrowers</span>
+              </div>
+            </div>
+
+            <div class="stat-card" style="--card-accent: #a855f7; --card-light: rgba(168, 85, 247, 0.15);">
+              <div class="stat-icon">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+              <div class="stat-content">
+                <p>Pending Fines</p>
+                <h3 id="stat-pending-fines">₹0.00</h3>
+                <span class="stat-badge" style="color: #a855f7;">₹2.00 / day rate</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts and Activity Split -->
+          <div class="dashboard-split">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3>Circulation & Borrowing Trends</h3>
+                  <p>Monthly book checkouts vs. checkins comparison</p>
+                </div>
+                <div style="display: flex; gap: 12px; font-size: 0.8rem;">
+                  <span style="color: var(--primary); font-weight: 700;">● Issued Books</span>
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="circulationChart"></canvas>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3>Recent Circulation Feed</h3>
+                  <p>Latest checkouts & returns</p>
+                </div>
+              </div>
+              <div class="activity-feed" id="recent-activity-feed"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             VIEW 2: BOOKS CATALOG
+             ========================================================== -->
+        <section id="view-books" class="view-section">
+          <div class="page-header">
+            <div class="page-title">
+              <h1>Books Catalog & Inventory</h1>
+              <p>Browse collection, filter by genre, add new books, or issue instantly.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openAddBookModal()">
+              + Add New Book
+            </button>
+          </div>
+
+          <div class="catalog-controls">
+            <div class="filter-group">
+              <button class="filter-chip active" data-cat="ALL">All Genres</button>
+              <button class="filter-chip" data-cat="Computer Science">Computer Science</button>
+              <button class="filter-chip" data-cat="Literature">Literature</button>
+              <button class="filter-chip" data-cat="Dystopian Fiction">Fiction</button>
+              <button class="filter-chip" data-cat="History">History</button>
+              <button class="filter-chip" data-cat="Self-Help">Self-Help</button>
+              <button class="filter-chip" data-cat="Algorithms">Algorithms</button>
+            </div>
+          </div>
+
+          <div class="books-grid" id="books-grid-container"></div>
+        </section>
+
+        <!-- ==========================================================
+             VIEW 3: CIRCULATION
+             ========================================================== -->
+        <section id="view-circulation" class="view-section">
+          <div class="page-header">
+            <div class="page-title">
+              <h1>Circulation & Loan History</h1>
+              <p>Track all active and past transactions with due dates and fine status.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openIssueModal()">
+              + Checkout Book
+            </button>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Txn #</th>
+                    <th>Book Details</th>
+                    <th>Member Details</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Return Date</th>
+                    <th>Fine (₹)</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="circulation-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==========================================================
+             VIEW 4: MEMBERS DIRECTORY
+             ========================================================== -->
+        <section id="view-members" class="view-section">
+          <div class="page-header">
+            <div class="page-title">
+              <h1>Members Directory</h1>
+              <p>Manage member registrations, contact details, and borrowing limits.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openAddMemberModal()">
+              + Register Member
+            </button>
+          </div>
+
+          <div class="books-grid" id="members-grid-container"></div>
+        </section>
+
+        <!-- ==========================================================
+             VIEW 5: OVERDUE FINES
+             ========================================================== -->
+        <section id="view-fines" class="view-section">
+          <div class="page-header">
+            <div class="page-title">
+              <h1>Overdue Tracking & Fine Settlement</h1>
+              <p>Automated overdue policy management, fee assessment (@ ₹2.00/day), and fee collection.</p>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="table-responsive">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Txn #</th>
+                    <th>Member Name</th>
+                    <th>Book Title</th>
+                    <th>Due Date</th>
+                    <th>Days Overdue</th>
+                    <th>Calculated Fine</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="fines-table-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ==============================================================
+       MODALS: ISSUE BOOK, ADD BOOK, ADD MEMBER
+       ============================================================== -->
+
+  <!-- Modal: Issue Book -->
+  <div id="issue-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Checkout / Issue Book</h3>
+        <button class="modal-close" onclick="closeAllModals()">&times;</button>
+      </div>
+      <form id="issue-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Select Book (Available only)</label>
+            <select id="issue-book-select" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label>Select Member</label>
+            <select id="issue-member-select" class="form-control" required></select>
+          </div>
+          <div class="form-group">
+            <label>Due Date (Calculated 14 Days)</label>
+            <input type="date" id="issue-due-date" class="form-control" readonly>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Confirm Checkout</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Book -->
+  <div id="add-book-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Add New Book to Inventory</h3>
+        <button class="modal-close" onclick="closeAllModals()">&times;</button>
+      </div>
+      <form id="add-book-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>ISBN</label>
+            <input type="text" name="isbn" class="form-control" placeholder="978-0134685991" required>
+          </div>
+          <div class="form-group">
+            <label>Book Title</label>
+            <input type="text" name="title" class="form-control" placeholder="e.g. Design Patterns" required>
+          </div>
+          <div class="form-group">
+            <label>Author Name</label>
+            <input type="text" name="author" class="form-control" placeholder="e.g. Erich Gamma" required>
+          </div>
+          <div class="form-group">
+            <label>Genre / Category</label>
+            <input type="text" name="category" class="form-control" placeholder="Computer Science" required>
+          </div>
+          <div class="form-group">
+            <label>Published Year</label>
+            <input type="number" name="year" class="form-control" value="2024" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Add Book</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Add New Member -->
+  <div id="add-member-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3>Register New Member</h3>
+        <button class="modal-close" onclick="closeAllModals()">&times;</button>
+      </div>
+      <form id="add-member-form">
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" name="name" class="form-control" placeholder="e.g. Priya Sharma" required>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" name="email" class="form-control" placeholder="priya@example.com" required>
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="text" name="phone" class="form-control" placeholder="+91 9876543210" required>
+          </div>
+          <div class="form-group">
+            <label>Max Borrow Limit</label>
+            <input type="number" name="limit" class="form-control" value="3" min="1" max="10" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" onclick="closeAllModals()">Cancel</button>
+          <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
